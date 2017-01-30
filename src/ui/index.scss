@@ -1,0 +1,41 @@
+body {
+	font-family: monospace;
+}
+
+canvas {
+  image-rendering: optimizeSpeed;             /* Older versions of FF          */
+  image-rendering: -moz-crisp-edges;          /* FF 6.0+                       */
+  image-rendering: -webkit-optimize-contrast; /* Safari                        */
+  image-rendering: -o-crisp-edges;            /* OS X & Windows Opera (12.02+) */
+  image-rendering: pixelated;                 /* Awesome future-browsers       */
+  -ms-interpolation-mode: nearest-neighbor;   /* IE                            */
+	display: inline-block;
+  height: 64px;
+}
+
+.display span {
+  font-size: 18px;
+  position: absolute;
+  top: 2px;
+  right: -9px;
+}
+
+.display span.attention {
+  font-size: 24px;
+  position: absolute;
+  right: -12px;
+  top: 20px;
+  left: initial;
+}
+
+.display {
+  position: relative;
+}
+
+.debugger {
+  display: inline-block;
+}
+
+.emulator {
+  display: inline-block;
+}
