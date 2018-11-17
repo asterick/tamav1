@@ -1,4 +1,4 @@
-import styles from './index.scss';
+import styles from './index.css';
 import React from 'react';
 import System from '../system';
 
@@ -17,8 +17,6 @@ export default class App extends React.Component {
 
 	// --- Rendering ---
 	render() {
-		return <div>
-			<Tamagotchi />
-		</div>;
+		return <Tamagotchi />;
 	}
 }
