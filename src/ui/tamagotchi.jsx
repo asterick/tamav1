@@ -65,6 +65,7 @@ export default class Tamagotchi extends Component {
 					<span>{ this.props.runtime.video.icons & 0x40 ? "💀" : null }</span>
 				</div>
 			</div>
+			<Debugger runtime={this.props.runtime} />
 		</div>
 	}
 }

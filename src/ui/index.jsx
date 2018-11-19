@@ -4,7 +4,6 @@ import styles from './index.css';
 import System from '../system';
 
 import Tamagotchi from "./tamagotchi";
-import Debugger from "./debugger";
 
 const system = new System();
 
@@ -18,7 +17,6 @@ export default class App extends Component {
 	render() {
 		return <div>
 			<Tamagotchi runtime={system} />
-			<Debugger runtime={system} />
 		</div>
 	}
 }
