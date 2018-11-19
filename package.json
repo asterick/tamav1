@@ -17,22 +17,21 @@
   "license": "MIT",
   "homepage": "https://github.com/asterick/tamav1",
   "babel": {
-    "presets": [
-      "@babel/preset-react"
-    ]
+    "plugins": [["babel-plugin-inferno", {"imports": true}]]
   },
   "dependencies": {
     "@babel/core": "^7.1.6",
-    "@babel/preset-react": "^7.0.0",
-    "react": "^16.6.3",
-    "react-dom": "^16.6.3",
     "babel-loader": "^8.0.4",
     "css-loader": "^1.0.1",
     "extract-text-webpack-plugin": "^3.0.2",
     "file-loader": "^2.0.0",
+    "inferno": "^6.2.1",
     "style-loader": "^0.23.1",
     "webpack": "^4.25.1",
     "webpack-cli": "^3.1.2",
     "webpack-dev-server": "^3.1.10"
+  },
+  "devDependencies": {
+    "babel-plugin-inferno": "^6.0.3"
   }
 }

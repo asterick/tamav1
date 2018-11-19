@@ -1,5 +1,6 @@
+import { Component } from 'inferno';
+
 import styles from './index.css';
-import React from 'react';
 
 function hex(v, l) {
 	var h = v.toString(16);
@@ -9,9 +10,9 @@ function hex(v, l) {
 const MEMORY_PER_LINE = 0x20;
 const MEMORY_TOTAL = 0x280;
 
-export default class Debugger extends React.Component {
+export default class Debugger extends Component {
 	memory(start, end) {
-		const runtime = this.props.runtime;
+		const { runtime } = this.props;
 		const lines = [];
 
 		for (var o = start; o < end; o += MEMORY_PER_LINE) {
@@ -28,7 +29,7 @@ export default class Debugger extends React.Component {
 	}
 
 	render() {
-		var runtime = this.props.runtime;
+		const { runtime } = this.props;
 
 		return <div className={styles.debugger}>
 			<div>

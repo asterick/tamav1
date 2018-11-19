@@ -1,15 +1,14 @@
+import { Component } from 'inferno';
+
 import styles from './index.css';
-import React from 'react';
 import System from '../system';
 
 import Tamagotchi from "./tamagotchi";
+import Debugger from "./debugger";
 
-function hex(v, l) {
-	var h = v.toString(16);
-	return "0000".substr(4 - (l - h.length)) + h;
-}
+const system = new System();
 
-export default class App extends React.Component {
+export default class App extends Component {
 	// --- Life-cycle operations ---
 	constructor(props, context) {
 		super(props, context);
@@ -17,6 +16,9 @@ export default class App extends React.Component {
 
 	// --- Rendering ---
 	render() {
-		return <Tamagotchi />;
+		return <div>
+			<Tamagotchi runtime={system} />
+			<Debugger runtime={system} />
+		</div>
 	}
 }
