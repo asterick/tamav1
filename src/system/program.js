@@ -222,11 +222,11 @@ const Templates = {
 	this.pc = temp | ${(pc - 1) & 0x1000}; 
 	return ${time};
 	`,
-	/*"RETS": (pc, time, pset, write) => `
+	"RETS": (pc, time, pset, write) => `
 	temp = this.pop() | (this.pop() << 4) | (this.pop() << 8) + 1;
 	this.pc = (temp & 0xFFF) | ${pc & ~0xFFF});
 	return ${time};
-	`,*/
+	`,
 	"RETD": (pc, time, pset, write, a) => `
 	this.pc = this.pop() | (this.pop() << 4) | (this.pop() << 8) | ${(pc - 1) & 0x1000}; 
 	this.write(this.x, ${a & 0xF}); 

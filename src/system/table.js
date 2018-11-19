@@ -1,16 +1,16 @@
 export default [
-    { terminate: true, cycles:  5, test: 0b000000000000, mask: 0b111100000000, op: "JP", args: ["{I}"] },
-    { terminate: true, cycles:  5, test: 0b111111101000, mask: 0b111111111111, op: "JPBA", args: [] },
+    { terminate:  true, cycles:  5, test: 0b000000000000, mask: 0b111100000000, op: "JP", args: ["{I}"] },
+    { terminate:  true, cycles:  5, test: 0b111111101000, mask: 0b111111111111, op: "JPBA", args: [] },
     { terminate: false, cycles:  5, test: 0b001000000000, mask: 0b111100000000, op: "JP", condition: "C", args: ["{I}"] },
     { terminate: false, cycles:  5, test: 0b001100000000, mask: 0b111100000000, op: "JP", condition: "NC", args: ["{I}"] },
     { terminate: false, cycles:  5, test: 0b011000000000, mask: 0b111100000000, op: "JP", condition: "Z", args: ["{I}"] },
     { terminate: false, cycles:  5, test: 0b011100000000, mask: 0b111100000000, op: "JP", condition: "NZ", args: ["{I}"] },
 
-    { terminate: true, cycles:  7, test: 0b010000000000, mask: 0b111100000000, op: "CALL", args: ["{I}"] },
-    { terminate: true, cycles:  7, test: 0b010100000000, mask: 0b111100000000, op: "CALZ", args: ["{I}"] },
-    { terminate: true, cycles:  7, test: 0b111111011111, mask: 0b111111111111, op: "RET", args: [] },
-    { terminate: true, cycles: 12, test: 0b111111011110, mask: 0b111111111111, op: "RETS", args: [] },
-    { terminate: true, cycles: 12, test: 0b000100000000, mask: 0b111100000000, op: "RETD", args: ["{I}"] },
+    { terminate:  true, cycles:  7, test: 0b010000000000, mask: 0b111100000000, op: "CALL", args: ["{I}"] },
+    { terminate:  true, cycles:  7, test: 0b010100000000, mask: 0b111100000000, op: "CALZ", args: ["{I}"] },
+    { terminate:  true, cycles:  7, test: 0b111111011111, mask: 0b111111111111, op: "RET", args: [] },
+    { terminate:  true, cycles: 12, test: 0b111111011110, mask: 0b111111111111, op: "RETS", args: [] },
+    { terminate:  true, cycles: 12, test: 0b000100000000, mask: 0b111100000000, op: "RETD", args: ["{I}"] },
 
     { terminate: false, cycles:  5, test: 0b100000000000, mask: 0b111100000000, op: "LD", args: ["YB", "{I}"] },
     { terminate: false, cycles:  5, test: 0b101100000000, mask: 0b111100000000, op: "LD", args: ["XB", "{I}"] },
