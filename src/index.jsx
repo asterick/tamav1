@@ -1,10 +1,9 @@
 import { render } from 'inferno';
 
-import App from './ui';
+import Tamagotchi from './ui';
+import System from './system';
 
-function rerender() {
-	const App = require('./ui').default;
-	return render(<App/>, document.querySelector("#app"));
-}
+const runtime = new System();
+const UI = <Tamagotchi runtime={ runtime } debugger={true} />;
 
-rerender();
+render(UI, document.querySelector("#app"));
