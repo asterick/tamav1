@@ -277,7 +277,5 @@ export default function Dynamic(pc, single) {
 		pset = (instruction.op == "PSET") ? (word << 8) : ((pc - 1) & 0x1F00);
 	} while (!instruction.terminate || instruction.condition);
 
-	//console.log(lines.join("\n"))
-
 	return Function(`var temp;\n${lines.join("\n")}`);
 }

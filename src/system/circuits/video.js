@@ -1,11 +1,15 @@
 const LINE_TABLE = [
-	 2,  4,  6,  8, 10, 12, 14, 18, 
-	20, 22, 24, 26, 28, 30, 32, 72, 
-	70, 68, 66, 64, 62, 60, 58, 54, 
-	52, 50, 48, 46, 44, 42, 40, 38,
+	 0,  2,  4,  6,  8, 10, 12, 14,
+	18, 20, 22, 24, 26, 28, 30, 32, 
+	72, 70, 68, 66, 64, 62, 60, 58, 
+	54, 52, 50, 48, 46, 44, 42, 40, 
 
-	// This are the apparent unused lines
-	//0,  16, 34, 36, 56, 74, 76, 78
+	/*
+	38, 36, 34,
+	16,
+	78, 76, 74, 
+	56,
+	*/
 ];
 
 const WIDTH = LINE_TABLE.length;
@@ -27,7 +31,7 @@ export default class Video {
 	}
 
 	get icons() {
-		return this.ram[16] | (this.ram[56+0x81] << 4);
+		return this.ram[0xE10] | (this.ram[0xEB9] << 4);
 	}
 
 	paint(pixels) {
@@ -48,10 +52,10 @@ export default class Video {
 		for (var i = 0; i < LINE_TABLE.length; i++) {
 			var o = LINE_TABLE[i] || i;
 			const line =
-				this.ram[o] |
-				(this.ram[o+1]<<4) |
-				(this.ram[o+0x80]<<8) |
-				(this.ram[o+0x81]<<12);
+				 this.ram[o+0xE00] |
+				(this.ram[o+0xE01] << 4) |
+				(this.ram[o+0xE80] << 8) |
+				(this.ram[o+0xE81] << 12);
 
 			for (var b = 0; b < 16; b++) {
 				var k = ((line >> b) & 1) ? on : off;

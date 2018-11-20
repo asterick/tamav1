@@ -7,10 +7,11 @@ import Inputs from "./circuits/inputs";
 import Serial from "./circuits/serial";
 import Video from "./circuits/video";
 
-const FAST_CLOCK_SPEED = 2000000;
-const MED_CLOCK_SPEED = FAST_CLOCK_SPEED / 2;
-const OSC1_CLOCK_SPEED = 32768;
-const PERF_CLOCK_SPEED = 8192;
+const GLOBAL_CLOCK_TARGET	= (2000000 / 128 * 32768)
+const FAST_CLOCK_SPEED 		= (GLOBAL_CLOCK_TARGET / 2000000);
+const MED_CLOCK_SPEED 		= (GLOBAL_CLOCK_TARGET / 1000000);
+const OSC1_CLOCK_SPEED 		= (GLOBAL_CLOCK_TARGET / 32768);
+const PERF_CLOCK_SPEED 		= (GLOBAL_CLOCK_TARGET / 8192);
 
 export default class System {
 	constructor() {
@@ -43,11 +44,11 @@ export default class System {
 		this.inputs = new Inputs();
 		this.outputs = new Outputs();
 		this.serial = new Serial();
-		this.video = new Video(new Uint8Array(this.ram.buffer, 0xE00));
+		this.video = new Video(this.ram);
 	}
 
 	run(clock) {
-		this.time += this.clock_speed * clock;
+		this.time += GLOBAL_CLOCK_TARGET * clock / 1000;
 
 		while (this.time > 0) {
 			this.step();
@@ -79,14 +80,15 @@ export default class System {
 			System.prototype[this.pc] = Program(this.pc);
 		}
 
-		delta += this[this.pc]();
+		delta += this[this.pc]() * this.clock_speed;
 		
-		this.time -= delta * 1000;		
-		this.perf_divider += delta * PERF_CLOCK_SPEED;
-		var ticks = Math.floor(this.perf_divider / this.clock_speed);
-		this.perf_divider %= this.clock_speed;
+		this.time -= delta;
+		this.perf_divider += delta;
 
-		if (ticks) {
+		if (this.perf_divider >= PERF_CLOCK_SPEED) {
+			const ticks = Math.floor(this.perf_divider / PERF_CLOCK_SPEED);
+			this.perf_divider %= PERF_CLOCK_SPEED;
+
 			this.timer.step(ticks);
 			this.clock.step(ticks);
 		}

@@ -4,7 +4,7 @@
   "description": "Tamagotchi V1 emulator",
   "main": "''",
   "scripts": {
-    "build": "webpack --config webpack.production.config.js --progress --profile --colors",
+    "build": "webpack --progress --profile --colors",
     "start": "webpack-dev-server --progress --profile --colors",
     "lint": "eslint --ext js --ext jsx src || exit 0",
     "test": "`npm bin`/babel-node ./tests/nestest.js"
