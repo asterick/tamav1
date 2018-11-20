@@ -2,11 +2,17 @@ import ProgramRom from "../data/tama";
 import Table from "./table";
 import Disassemble from "./disasm";
 
-const read_reg_table = ["this.a", "this.b", "this.read(this.x)", "this.read(this.y)"];
+const read_reg_table = [
+	"this.a", 
+	"this.b", 
+	"this.read(this.x)",
+	"this.read(this.y)"
+];
 
 const read_translate = {
 	"A": () => "this.a",
 	"B": () => "this.b",
+	"BA": () => "((this.b << 4) | this.a)",
 	"XL": () => "(this.x & 0xF)",
 	"XH": () => "((this.x >> 4) & 0xF)",
 	"XP": () => "((this.x >> 8) & 0xF)",
@@ -196,30 +202,26 @@ const Templates = {
 	this.c = (temp < 0);
 	this.z = (temp == 0);
 	`,
-
 	"JP": (pc, time, pset, write, a) => `
-	this.pc = ${pset | a};
-	return ${time};
-	`,
-	"JPBA": (pc, time, pset, write, a) => `
-	this.pc = ${pset} | (this.b << 4) | this.a;
+	debugger ;
+	this.pc = ${pset} | ${a};
 	return ${time};
 	`,
 	"CALL": (pc, time, pset, write, a) => `
 	this.push(${(pc >> 8) & 0xF});
 	this.push(${(pc >> 4) & 0xF});
 	this.push(${pc & 0xF});
-	this.pc = ${(pset & 0xF00) | a | ((pc - 1) & 0x1000)};
+	this.pc = ${(pset & 0xF00) | a | ((pc - 1) & ~0xFFF)};
 	return ${time};`,
 	"CALZ": (pc, time, pset, write, a) => `
 	this.push(${(pc >> 8) & 0xF});
 	this.push(${(pc >> 4) & 0xF});
 	this.push(${pc & 0xF});
-	this.pc = ${a | ((pc - 1) & 0x1000)};
+	this.pc = ${a | ((pc - 1) & ~0xFFF)};
 	return ${time};`,
 	"RET": (pc, time, pset, write) => `
 	temp = this.pop() | (this.pop() << 4) | (this.pop() << 8);
-	this.pc = temp | ${(pc - 1) & 0x1000}; 
+	this.pc = temp | ${(pc - 1) & ~0xFFF}; 
 	return ${time};
 	`,
 	"RETS": (pc, time, pset, write) => `
@@ -228,7 +230,7 @@ const Templates = {
 	return ${time};
 	`,
 	"RETD": (pc, time, pset, write, a) => `
-	this.pc = this.pop() | (this.pop() << 4) | (this.pop() << 8) | ${(pc - 1) & 0x1000}; 
+	this.pc = this.pop() | (this.pop() << 4) | (this.pop() << 8) | ${(pc - 1) & ~0xFFF}; 
 	this.write(this.x, ${a & 0xF}); 
 	this.x = (this.x + 1) & 0xFFF; 
 	this.write(this.x, ${a >> 4}); 
