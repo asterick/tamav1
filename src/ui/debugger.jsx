@@ -22,7 +22,7 @@ export default class Debugger extends Component {
 				line.push(<span key={b}>{runtime.ram[o+b].toString(16)}</span>);
 			}
 
-			lines.push(<div key={o}><span>{hex(o, 4)}: </span>{ line }</div>);
+			lines.push(<div key={o}><span>{hex(o, 3)}: </span>{ line }</div>);
 		}
 		
 		return <div>{lines}</div>;

@@ -5,6 +5,7 @@ var path = require('path');
 const PORT = process.env.PORT || "8888";
 
 module.exports = {
+	mode: "production",
 	entry: {
 		bundle: './src/index.jsx'
 	},
@@ -19,7 +20,7 @@ module.exports = {
 		rules: [
 			{
 				test: /\.css$/,
-				exclude: /[\/\\](node_modules)[\/\\]/,
+				exclude: /node_modules/,
 				use: [
 					'style-loader?sourceMap',
 					'css-loader?modules&importLoaders=1&localIdentName=[path]___[name]__[local]___[hash:base64:5]'
@@ -27,7 +28,7 @@ module.exports = {
 			},
 			{
 				test: /\.jsx?$/,
-				exclude: /(node_modules|bower_components|public)/,
+				exclude: /node_modules/,
 				use: "babel-loader"
 			}
 		]
