@@ -38,9 +38,9 @@ export default class Tamagotchi extends Component {
 
 	step() {
 		var time = Date.now();
-		var delta = Math.min(1000, time - this.time);
+		var delta = turbo ? 1000 : Math.min(1000, time - this.time);
 
-		this.props.runtime.run(delta * (turbo ? 600 : 1));
+		this.props.runtime.run(delta);
 		this.time = time;
 		this.repaint();
 

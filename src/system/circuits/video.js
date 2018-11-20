@@ -4,11 +4,9 @@ const LINE_TABLE = [
 	72, 70, 68, 66, 64, 62, 60, 58, 
 	54, 52, 50, 48, 46, 44, 42, 40, 
 
-	/*
-	38, 36, 34,
-	16,
-	78, 76, 74, 
-	56,
+	/* Unused lines and icon rows
+	16, 36, 38, 34,
+	78, 76, 74, 56,	
 	*/
 ];
 
@@ -25,8 +23,8 @@ const PALETTE = [
 
 export default class Video {
 	constructor(ram) {
-		this.config = 0x8;
 		this.ram = ram;
+		this.config = 0x8;
 		this.contrast = 0;
 	}
 
