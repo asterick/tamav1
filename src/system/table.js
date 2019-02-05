@@ -1,4 +1,4 @@
-export default [
+module.exports = [
     { terminate:  true, cycles:  5, test: 0b000000000000, mask: 0b111100000000, op: "JP", args: ["{I}"] },
     { terminate:  true, cycles:  5, test: 0b111111101000, mask: 0b111111111111, op: "JP", args: ["BA"] },
     { terminate: false, cycles:  5, test: 0b001000000000, mask: 0b111100000000, op: "JP", condition: "C", args: ["{I}"] },
